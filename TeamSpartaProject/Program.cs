@@ -80,11 +80,11 @@ class GameManager
 
     public void MainScreen() //메인메뉴
     {
-        Console.Clear();
-
+        
         // 고양이 아트 출력
         ConsoleStyler.PrintCatArt();
 
+        Console.Clear();
 
         Console.Clear();
         Console.WriteLine("스파르타 던전에 오신 여러분 환영합니다.");

@@ -16,3 +16,6 @@ C:\heon_projects_visual\TeamSpartaProject\TeamSpartaProject\obj\Debug\net8.0\ref
 C:\heon_projects_visual\TeamSpartaProject\TeamSpartaProject\obj\Debug\net8.0\TeamSpartaProject.pdb
 C:\heon_projects_visual\TeamSpartaProject\TeamSpartaProject\obj\Debug\net8.0\TeamSpartaProject.genruntimeconfig.cache
 C:\heon_projects_visual\TeamSpartaProject\TeamSpartaProject\obj\Debug\net8.0\ref\TeamSpartaProject.dll
+C:\UnityProject\TeamSpartaProject\TeamSpartaProject\obj\Debug\net8.0\TeamSpartaProject.dll
+C:\UnityProject\TeamSpartaProject\TeamSpartaProject\obj\Debug\net8.0\refint\TeamSpartaProject.dll
+C:\UnityProject\TeamSpartaProject\TeamSpartaProject\obj\Debug\net8.0\TeamSpartaProject.pdb
