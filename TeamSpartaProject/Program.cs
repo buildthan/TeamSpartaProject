@@ -7,6 +7,7 @@ namespace TeamProject;
 
 class Program
 {
+    //깃허브 체크용 주석
     static void Main(string[] args)
     {
         GameManager gm = new GameManager(); //생성자를 이용해 시작 데이터 세팅
