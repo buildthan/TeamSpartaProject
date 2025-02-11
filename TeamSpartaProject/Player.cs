@@ -16,10 +16,11 @@ namespace SpartanTeamProject
         public double Deffense { get; set; }
         public double Health { get; set; }
         public double MaxHealth { get; set; }
-        public double Exp { get; set; }
+        public int Exp { get; set; } // 경험치
+        public int ExpNextLevel { get; set; } // 추가 경험치
         public double Gold { get; set; }
 
-        public Player(string name, int level, string job, float attack, float deffense, float health, float maxHealth, float exp, float gold)
+        public Player(string name, int level, string job, float attack, float deffense, float health, float maxHealth, int exp, int expNextLevel, float gold)
         {
             Name = name;
             Level = level;
@@ -29,6 +30,7 @@ namespace SpartanTeamProject
             Health = health; //현재 체력
             MaxHealth = maxHealth;//최대 체력
             Exp = exp; //경험치
+            ExpNextLevel = expNextLevel; // 추가 경험치
             Gold = gold;
         }
 
@@ -53,6 +55,15 @@ namespace SpartanTeamProject
             damage = rand.Next((int)Attack - (int)difference, (int)Attack + (int)difference + 1);
 
             return damage;
+        }
+
+        // 레벨업 확인
+        public void LevelUp()
+        {
+            if (Exp >= ExpNextLevel)ㄴ
+            {
+                LevelUp();  // 경험치가 목표에 도달하면 레벨업
+            }
         }
     }
 }
