@@ -76,14 +76,22 @@ namespace SpartanTeamProject
             Console.WriteLine($"{Name}이(가) 레벨 {Level}로 상승했습니다!");
         }
         // 몬스터 처치 후 경험치 추가
-        public void GainExperience(Monster monster)
+        public void GainExp(Monster monster)
         {
-            Exp += monster.GetExperience();  // 몬스터의 경험치만큼 추가
-            Console.WriteLine($"{monster.Name} 처치! 경험치 {monster.GetExperience()} 획득!");
+            Exp += monster.GetExp();  // 몬스터의 경험치만큼 추가
+            Console.WriteLine($"{monster.Name} 처치! 경험치 {monster.GetExp()} 획득!");
 
             CheckLevelUp();  // 레벨업 체크
         }
+        // 골드 획득 메서드
+        public void GainGold(Monster monster)
+        {
+            int gold = monster.GetGold();
+            Gold += gold;
+            Console.WriteLine($"{monster.Name} 처치! 골드 {gold} 획득! 현재 골드: {Gold}");
+        }
 
+       
 
     }
 }

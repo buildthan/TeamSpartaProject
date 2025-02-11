@@ -15,6 +15,8 @@ namespace SpartanTeamProject
         public double MaxHealth { get; set; }
         public double Attack { get; set; }
         public int ExpReward { get; set; } // 몬스터를 처치하면 얻는 경험치
+        public int GoldReward { get; set; } // 골드 보상
+        
 
         public Monster(string name, int level, double health, double maxHealth, double attack)
         {
@@ -24,6 +26,7 @@ namespace SpartanTeamProject
             MaxHealth = maxHealth;
             Attack = attack;
             ExpReward = level; // 경험치는 몬스터 레벨만큼
+            GoldReward = 500; // 골드 보상
         }
 
         public int MonsterAttack()
@@ -39,9 +42,15 @@ namespace SpartanTeamProject
         }
 
         // 몬스터 처치 후 경험치 얻기
-        public virtual int GetExperience()
+        public int GetExp()
         {
             return ExpReward;
         }
+        // 골드 보상
+        public int GetGold()
+        {
+            return GoldReward;
+        }
+
     }
 }

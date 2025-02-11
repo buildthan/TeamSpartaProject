@@ -2,6 +2,7 @@
 using System.Runtime.Serialization.Formatters.Binary;
 using SpartanTeamProject;
 using Newtonsoft.Json;
+using System.Threading;
 
 namespace TeamProject;
 
@@ -403,8 +404,12 @@ class GameManager
         Console.WriteLine("");
         Console.WriteLine($"던전에서 몬스터 {battleList.Count}마리를 잡았습니다.");
         Console.WriteLine("");
+        Console.WriteLine("[캐릭터 정보]");
         Console.WriteLine($"Lv. {player.Level} {player.Name}");
         Console.WriteLine($"HP {player.MaxHealth} -> {player.Health}");
+        Console.WriteLine($"Exp {player.Exp} -> {player.ExpNextLevel}");
+        Console.WriteLine("");
+        Console.WriteLine("[획득 아이템]");
         Console.WriteLine("");
         Console.WriteLine("0.다음");
         Console.WriteLine("");
