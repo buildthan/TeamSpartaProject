@@ -29,7 +29,7 @@ namespace SpartanTeamProject
             Deffense = deffense;
             Health = health; //현재 체력
             MaxHealth = maxHealth;//최대 체력
-            Exp = exp; //경험치
+            Exp = exp; // 경험치
             ExpNextLevel = expNextLevel; // 추가 경험치
             Gold = gold;
         }
@@ -58,12 +58,24 @@ namespace SpartanTeamProject
         }
 
         // 레벨업 확인
-        public void LevelUp()
+        public void CheckLevelUp()
         {
-            if (Exp >= ExpNextLevel)ㄴ
+            if (Exp >= ExpNextLevel)
             {
                 LevelUp();  // 경험치가 목표에 도달하면 레벨업
             }
         }
+        // 레벨업 메서드
+        private void LevelUp()
+        {
+            Level++;
+            Attack += 0.5;  // 레벨업 시 공격력 증가
+            Deffense += 1;   // 레벨업 시 방어력 증가
+            Exp -= ExpNextLevel;  // 레벨업 후 경험치 초기화
+            ExpNextLevel = (int)(ExpNextLevel * 3.5);  // 다음 레벨업까지 필요한 경험치 증가
+            Console.WriteLine($"{Name}이(가) 레벨 {Level}로 상승했습니다!");
+        }
+
+
     }
 }
