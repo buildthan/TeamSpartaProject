@@ -5,6 +5,14 @@
     {
       "AbsoluteMoniker": "D:0:0:{432768E5-40C8-4511-8B80-1BA0060A2DF3}|TeamSpartaProject\\TeamSpartaProject.csproj|c:\\heon_projects_visual\\teamspartaproject\\teamspartaproject\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{432768E5-40C8-4511-8B80-1BA0060A2DF3}|TeamSpartaProject\\TeamSpartaProject.csproj|solutionrelative:teamspartaproject\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{432768E5-40C8-4511-8B80-1BA0060A2DF3}|TeamSpartaProject\\TeamSpartaProject.csproj|c:\\heon_projects_visual\\teamspartaproject\\teamspartaproject\\player.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{432768E5-40C8-4511-8B80-1BA0060A2DF3}|TeamSpartaProject\\TeamSpartaProject.csproj|solutionrelative:teamspartaproject\\player.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{432768E5-40C8-4511-8B80-1BA0060A2DF3}|TeamSpartaProject\\TeamSpartaProject.csproj|c:\\heon_projects_visual\\teamspartaproject\\teamspartaproject\\quest.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{432768E5-40C8-4511-8B80-1BA0060A2DF3}|TeamSpartaProject\\TeamSpartaProject.csproj|solutionrelative:teamspartaproject\\quest.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -24,10 +32,34 @@
               "RelativeDocumentMoniker": "TeamSpartaProject\\Program.cs",
               "ToolTip": "C:\\heon_projects_visual\\TeamSpartaProject\\TeamSpartaProject\\Program.cs",
               "RelativeToolTip": "TeamSpartaProject\\Program.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA4AAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-02-08T05:50:16.975Z",
               "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "Quest.cs",
+              "DocumentMoniker": "C:\\heon_projects_visual\\TeamSpartaProject\\TeamSpartaProject\\Quest.cs",
+              "RelativeDocumentMoniker": "TeamSpartaProject\\Quest.cs",
+              "ToolTip": "C:\\heon_projects_visual\\TeamSpartaProject\\TeamSpartaProject\\Quest.cs",
+              "RelativeToolTip": "TeamSpartaProject\\Quest.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABEAAAAnAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-02-10T01:56:01.174Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "Player.cs",
+              "DocumentMoniker": "C:\\heon_projects_visual\\TeamSpartaProject\\TeamSpartaProject\\Player.cs",
+              "RelativeDocumentMoniker": "TeamSpartaProject\\Player.cs",
+              "ToolTip": "C:\\heon_projects_visual\\TeamSpartaProject\\TeamSpartaProject\\Player.cs",
+              "RelativeToolTip": "TeamSpartaProject\\Player.cs",
+              "ViewState": "AgIAAA4AAAAAAAAAAAAQwAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-02-10T01:59:18.491Z"
             }
           ]
         }

@@ -7,6 +7,7 @@ namespace TeamProject;
 
 class Program
 {
+    //깃허브 체크용 주석
     static void Main(string[] args)
     {
         GameManager gm = new GameManager(); //생성자를 이용해 시작 데이터 세팅
@@ -20,6 +21,7 @@ class GameManager
     Player player;
     List<Monster> monsterList;
     List<Monster> battleList;
+    List<Quest> questList;
 
     public GameManager()
     {
@@ -70,6 +72,42 @@ class GameManager
              ),
 
         };
+
+
+        questList = new List<Quest>
+        {
+            new Quest
+            ("미니언 처치", //퀘스트 제목
+            "미니언이 침입했습니다.\n미니언을 처치해주세요.", //퀘스트 설명
+            false, //퀘스트 클리어 여부
+            false, //퀘스트 승낙 여부
+            1, //퀘스트 완료 조건
+            0, //퀘스트 현재 진행도
+            "미니언", //퀘스트 요구 몬스터
+            5
+            ),
+            new Quest
+            ("공허충 처치", //퀘스트 제목
+            "공허충이 침입했습니다.\n공허충을 처치해주세요.", //퀘스트 설명
+            false, //퀘스트 클리어 여부
+            false, //퀘스트 승낙 여부
+            1, //퀘스트 완료 조건
+            0, //퀘스트 현재 진행도
+            "공허충", //퀘스트 요구 몬스터
+            10
+            ),
+            new Quest
+            ("대포미니언 처치", //퀘스트 제목
+            "대포미니언이 침입했습니다.\n대포미니언을 처치해주세요.", //퀘스트 설명
+            false, //퀘스트 클리어 여부
+            false, //퀘스트 승낙 여부
+            1, //퀘스트 완료 조건
+            0, //퀘스트 현재 진행도
+            "대포미니언", //퀘스트 요구 몬스터
+            15
+            )
+
+        };
     }
 
     public static T DeepClone<T>(T obj) //리스트 값을 참조하지 않고 복사해오기 위한 매서드
@@ -92,11 +130,12 @@ class GameManager
         Console.WriteLine("");
         Console.WriteLine("1. 상태 보기");
         Console.WriteLine("2. 전투 시작");
+        Console.WriteLine("4. 퀘스트");
         Console.WriteLine("");
         Console.WriteLine("원하시는 행동을 입력해주세요.");
         Console.WriteLine("");
 
-        int input = ConsoleUtility.GetInput(1, 2);
+        int input = ConsoleUtility.GetInput(1, 4);
 
         switch(input)
         {
@@ -106,7 +145,132 @@ class GameManager
             case 2:
                 BattleScreen(); //2. 전투시작
                 break;
+            case 4:
+                QuestScreen(); //4. 퀘스트
+                break;
         
+        }
+
+    }
+
+    public void QuestScreen() //퀘스트 리스트 나열
+    {
+        List<int> ints = new List<int>();
+
+        Console.Clear();
+        Console.WriteLine("Quest!!");
+        Console.WriteLine("");
+
+        for (int i = 0; i < questList.Count; i++)
+        {
+            if (questList[i].IsClear == false) //클리어한 퀘스트만 창에 띄움.
+            {
+                ints.Add(i);
+            }
+        }
+        
+        for(int i = 0; i<ints.Count; i++)
+        {
+            Console.Write($"{i + 1}. {questList[ints[i]].Title}");
+
+            if (questList[ints[i]].IsAccept == true)
+            {
+                Console.Write(" (진행중)");
+            }
+
+            Console.WriteLine();
+        }
+
+        Console.WriteLine("");
+        Console.WriteLine("0. 돌아가기");
+        Console.WriteLine("");
+        Console.WriteLine("원하시는 행동을 선택해주세요.");
+        Console.WriteLine("");
+
+        int input = ConsoleUtility.GetInput(0, ints.Count);
+
+        if (input == 0) //돌아가기를 선택한 경우
+        {
+            MainScreen();
+        }
+        else
+        {
+            QuestDetail(ints[input - 1]); //퀘스트의 인덱스 번호를 퀘스트디테일에 넘겨준다.
+        }
+
+    }
+
+    public void QuestDetail(int select)
+    { 
+        Console.Clear();
+        Console.WriteLine("Quest!!");
+        Console.WriteLine("");
+
+        if (questList[select].IsAccept == true)
+        {
+            Console.WriteLine("현재 진행중인 퀘스트 입니다.");
+            Console.WriteLine("");
+        }
+
+        questList[select].printInfo();
+
+        Console.WriteLine("");
+
+        if (questList[select].IsAccept == true)
+        //퀘스트를 수락했다면
+        {
+            if(questList[select].NowCondition >= questList[select].CompletionCondition) //퀘스트를 클리어했다면
+            {
+                Console.WriteLine("1. 보상 받기");
+                Console.WriteLine("2. 돌아가기");
+                Console.WriteLine("");
+                Console.WriteLine("원하시는 행동을 입력해주세요.");
+                Console.WriteLine("");
+
+                int input = ConsoleUtility.GetInput(1, 2);
+
+                if(input == 1) //보상받기를 누른 경우
+                {
+                    player.Gold += questList[select].Reward; //보상을 지급하고 퀘스트 리셋
+                    questList[select].IsClear = true;
+                    questList[select].IsAccept = false;
+                    questList[select].NowCondition = 0;
+                    QuestScreen();
+                }
+                else //돌아가기를 누른 경우
+                {
+                    QuestScreen();
+                }
+
+            }
+            else //퀘스트를 클리어하지 못했다면
+            {
+                Console.WriteLine("1. 돌아가기");
+                Console.WriteLine("");
+                Console.WriteLine("원하시는 행동을 입력해주세요.");
+                Console.WriteLine("");
+
+                int input = ConsoleUtility.GetInput(1, 1);
+
+                QuestScreen();
+            }
+        }
+        else //아직 퀘스트를 수락하지 않았다면
+        {
+            Console.WriteLine("1. 수락");
+            Console.WriteLine("2. 거절");
+            Console.WriteLine("");
+            Console.WriteLine("원하시는 행동을 입력해주세요.");
+            Console.WriteLine("");
+
+            int input = ConsoleUtility.GetInput(1, 2);
+
+            if(input == 1) //수락을 눌렀다면
+            {
+                questList[select].IsAccept = true;
+            }
+
+            QuestScreen();
         }
 
     }
@@ -267,10 +431,19 @@ class GameManager
         Console.WriteLine($"Lv.{battleList[input - 1].Level} {battleList[input - 1].Name}");
         Console.Write($"HP {battleList[input-1].Health} -> ");
         battleList[input - 1].Health = battleList[input - 1].Health - damage;
-        if(battleList[input - 1].Health <= 0)
+        if(battleList[input - 1].Health <= 0) //적을 쓰러뜨렸다면
         {
             battleList[input - 1].Health = 0;
             ConsoleUtility.ForegroundColor_DarkGray("Dead");
+
+            for(int i =0; i<questList.Count; i++) //퀘스트 조건을 완수했는지 확인함
+            {
+                if (questList[i].IsAccept == true && questList[i].WhichMonster == battleList[input - 1].Name)
+                {
+                    questList[i].NowCondition += 1;
+                }
+            }
+
         }
         else
         {
