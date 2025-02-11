@@ -734,6 +734,15 @@ class GameManager
         {
             battleList[input - 1].Health = 0;
             ConsoleUtility.ForegroundColor_DarkGray("Dead");
+
+            for (int i = 0; i < questList.Count; i++) //퀘스트 조건을 완수했는지 확인함
+            {
+                if (questList[i].IsAccept == true && questList[i].WhichMonster == battleList[input - 1].Name)
+                {
+                    questList[i].NowCondition += 1;
+                }
+            }
+
         }
         else
         {
@@ -827,10 +836,19 @@ class GameManager
             Console.WriteLine($"Lv.{alivemonster[i].Level} {alivemonster[i].Name}");
             Console.Write($"HP {alivemonster[i].Health} -> ");
             alivemonster[i].Health = alivemonster[i].Health - damage;
+
             if (alivemonster[i].Health <= 0)
             {
                 alivemonster[i].Health = 0;
                 ConsoleUtility.ForegroundColor_DarkGray("Dead");
+
+                for (int j = 0; j < questList.Count; j++) //퀘스트 조건을 완수했는지 확인함
+                {
+                    if (questList[j].IsAccept == true && questList[j].WhichMonster == alivemonster[i].Name)
+                    {
+                        questList[j].NowCondition += 1;
+                    }
+                }
             }
             else
             {
