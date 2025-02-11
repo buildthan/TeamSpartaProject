@@ -75,6 +75,14 @@ namespace SpartanTeamProject
             ExpNextLevel = (int)(ExpNextLevel * 3.5);  // 다음 레벨업까지 필요한 경험치 증가
             Console.WriteLine($"{Name}이(가) 레벨 {Level}로 상승했습니다!");
         }
+        // 몬스터 처치 후 경험치 추가
+        public void GainExperience(Monster monster)
+        {
+            Exp += monster.GetExperience();  // 몬스터의 경험치만큼 추가
+            Console.WriteLine($"{monster.Name} 처치! 경험치 {monster.GetExperience()} 획득!");
+
+            CheckLevelUp();  // 레벨업 체크
+        }
 
 
     }
