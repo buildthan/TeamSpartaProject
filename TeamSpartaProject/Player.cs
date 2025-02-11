@@ -16,9 +16,10 @@ namespace SpartanTeamProject
         public double Deffense { get; set; }
         public double Health { get; set; }
         public double MaxHealth { get; set; }
+        public double Exp { get; set; }
         public double Gold { get; set; }
 
-        public Player(string name, int level, string job, float attack, float deffense, float health, float maxHealth, float gold)
+        public Player(string name, int level, string job, float attack, float deffense, float health, float maxHealth, float exp, float gold)
         {
             Name = name;
             Level = level;
@@ -27,6 +28,7 @@ namespace SpartanTeamProject
             Deffense = deffense;
             Health = health; //현재 체력
             MaxHealth = maxHealth;//최대 체력
+            Exp = exp; //경험치
             Gold = gold;
         }
 
