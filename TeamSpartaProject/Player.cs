@@ -27,7 +27,6 @@ namespace SpartanTeamProject
         public double Gold { get; set; }
         public double Mana { get; set; } // 현재 MP
         public double MaxMana { get; set; } // 최대 MP
-        public double Gold { get; set; }        
         public bool iscritical = false; // 치명타 발동 여부
         public bool isevade = false; // 공격이 적중했는지 여부
         public double Alphacount { get; set; } // 알파스킬 사용횟수

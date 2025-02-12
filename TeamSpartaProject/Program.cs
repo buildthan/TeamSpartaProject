@@ -36,10 +36,10 @@ class GameManager
             5, //플레이어 방어력
             100, //플레이어 현재체력
             100, //플레이어 최대체력
-            0, //경험치
-            10, // 추가 경험치
             50, //플레이어 현재마나
-            50, //플레이어 최대마나
+            50, // 플레이어 최대마나
+            0, //플레이어 현재 경험치
+            10, //플레이어 다음 레벨 경험치
             1500 //플레이어 소지골드
             );
 
@@ -787,7 +787,9 @@ class GameManager
 
 
     public void AlphaResultScreen(int input) // 알파스킬 결과창
-    {        
+    {
+        int totalExp = 0;
+        int totalGold = 0;
         player.Alphacount = 1; // 알파스킬 사용횟수 UP
         player.Mana = player.Mana - player.Alphacount*10;
 
@@ -840,6 +842,13 @@ class GameManager
             }
         }
 
+        foreach (var monster in battleList)
+        {
+            totalExp += monster.GetExp();  // 몬스터의 경험치 합산
+            totalGold += monster.GetGold(); // 몬스터의 골드 합산
+        }
+
+
         int Input = ConsoleUtility.GetInput(0, 0);
 
         while (true)
@@ -847,7 +856,7 @@ class GameManager
             if (enemy_down_count == battleList.Count) //적들이 모두 쓰러졌다면
             {
                 //Victory 결과창 출력
-                Victory();
+                Victory(totalExp, totalGold);
                 break;
             }
 
@@ -860,7 +869,7 @@ class GameManager
 
             if (player.Health > 0) //플레이어 체력이 여전히 남아있다면
             {
-                EnemyPhase(); //적 공격 차례 시작
+                EnemyPhase(totalExp, totalGold); //적 공격 차례 시작
                 break;
             }
         }        
@@ -868,6 +877,8 @@ class GameManager
 
     public void DoubleResultScreen() // 더블스킬 결과창
     {
+        int totalExp = 0;
+        int totalGold = 0;
         player.Doublecount = 1; // 더블스킬 사용횟수 UP
         player.Mana = player.Mana - player.Doublecount * 15;
 
@@ -948,6 +959,12 @@ class GameManager
             }
         }
 
+        foreach (var monster in battleList)
+        {
+            totalExp += monster.GetExp();  // 몬스터의 경험치 합산
+            totalGold += monster.GetGold(); // 몬스터의 골드 합산
+        }
+
         int Input = ConsoleUtility.GetInput(0, 0);
 
         while (true)
@@ -968,7 +985,7 @@ class GameManager
 
             if (player.Health > 0) //플레이어 체력이 여전히 남아있다면
             {
-                EnemyPhase(); //적 공격 차례 시작
+                EnemyPhase(totalExp, totalGold); //적 공격 차례 시작
                 break;
             }
         }
