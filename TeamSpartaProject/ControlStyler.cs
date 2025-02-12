@@ -2,7 +2,6 @@
 using System.Web;
 
 
-
 namespace SpartanTeamProject
 {
 
