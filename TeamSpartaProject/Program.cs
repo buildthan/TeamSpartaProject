@@ -4,6 +4,7 @@ using SpartanTeamProject;
 using Newtonsoft.Json;
 using System.Threading;
 using System.Numerics;
+using System.Xml.Linq;
 
 
 namespace TeamProject;
@@ -28,8 +29,40 @@ class GameManager
     List<Monster> battleList;
     List<Monster> alivemonster;
     List<Quest> questList;
+    List<Item> itemList;
     public GameManager()
     {
+        itemList = new List<Item>
+        {
+            new Item
+            (
+            "체력 회복약", //아이템 이름
+            "체력을 30 회복해줍니다", //아이템 설명
+            30, //효과
+            "체력소모품", //아이템 타입
+            100, //아이템 가격
+            3 //아이템 소지개수
+             ),
+            new Item
+            (
+            "마나 회복약", //아이템 이름
+            "마나를 30 회복해줍니다", //아이템 설명
+            30, //효과
+            "마나소모품", //아이템 타입
+            100, //아이템 가격
+            3 //아이템 소지개수
+             ),
+            new Item
+            (
+            "짱 큰 마나 회복약", //아이템 이름
+            "마나를 60 회복해줍니다", //아이템 설명
+            60, //효과
+            "마나소모품", //아이템 타입
+            300, //아이템 가격
+            1 //아이템 소지개수
+             )
+        };
+
         player = new Player(
             1, //플레이어 레벨
             20, //플레이어 공격력
@@ -85,6 +118,16 @@ class GameManager
                 10, //경험치 보상
                 500 //골드 보상
              ),
+            new Monster
+            (
+                "한효승", //이름
+                10, //레벨
+                30, //현재 체력
+                30, //최대 체력
+                10, //공격력
+                10, //경험치 보상
+                500 //골드 보상
+             ),
 
         };
 
@@ -133,57 +176,113 @@ class GameManager
 
     public void StartScreen()
     {
-
-        Console.Clear();
-        // 고양이 아트 출력
-        ConsoleStyler.PrintCatArt();
-
-        Console.WriteLine("스파르타 던전에 오신 여러분 환영합니다.");
-        Console.WriteLine("");
-        Console.WriteLine("원하시는 이름을 설정해주세요.");
-
-        Console.WriteLine("");
-        Console.Write(""); 
-        player.Name = Console.ReadLine(); //캐릭터 이름 짓기
-
-        Console.Clear();
-
-        ConsoleStyler.PrintCatArt();
-
-        Console.WriteLine("");
-        Console.WriteLine($"반갑습니다 {player.Name} 님!");
-        Console.WriteLine("");
-
-        string[] jobs = { "전사", "마법사", "도적", "궁수" };
-
-        int input = -1; //유효한 입력이 들어올 때까지 반복
-        while (input < 0 || input >= jobs.Length)
+        while (true)
         {
-            Console.WriteLine("\n원하는 직업을 선택하십시오: \n");
-            for (int i = 0; i < jobs.Length; i++)
-            {
-                Console.WriteLine($"{i + 1}. {jobs[i]}");
-            }
-            Console.WriteLine("\n번호를 입력하세요: ");
-            bool isValid = int.TryParse(Console.ReadLine(), out input);
-            input -= 1; //입력값을 0부터 시작하도록 보정
+            //현재 경로
+            string currentPath = Directory.GetCurrentDirectory();
+            currentPath += "\\Save"; //세이브파일 추가
 
-            if (!isValid || input < 0 || input >= jobs.Length)
+            //현재 경로에 Save 폴더가 존재하는지 확인
+            if (!Directory.Exists(currentPath))
             {
-                Console.WriteLine("\n잘못된 입력입니다. 다시 선택해주세요,");
+                //디렉토리가 없다면 해당 위치에 디렉토리 생성
+                Directory.CreateDirectory(currentPath);
             }
-            
+
+            if (!File.Exists(currentPath + "\\playerData.json"))
+            //저장 정보가 없다면 새로 실행
+            {
+
+                Console.Clear();
+                // 고양이 아트 출력
+                ConsoleStyler.PrintCatArt();
+
+                Console.WriteLine("스파르타 던전에 오신 여러분 환영합니다.");
+                Console.WriteLine("");
+                Console.WriteLine("원하시는 이름을 설정해주세요.");
+
+                Console.WriteLine("");
+                Console.Write("");
+                player.Name = Console.ReadLine(); //캐릭터 이름 짓기
+
+                Console.Clear();
+
+                ConsoleStyler.PrintCatArt();
+
+                Console.WriteLine("");
+                Console.WriteLine($"반갑습니다 {player.Name} 님!");
+                Console.WriteLine("");
+
+                string[] jobs = { "전사", "마법사", "도적", "궁수" };
+
+                int input = -1; //유효한 입력이 들어올 때까지 반복
+                while (input < 0 || input >= jobs.Length)
+                {
+                    Console.WriteLine("\n원하는 직업을 선택하십시오: \n");
+                    for (int i = 0; i < jobs.Length; i++)
+                    {
+                        Console.WriteLine($"{i + 1}. {jobs[i]}");
+                    }
+                    Console.WriteLine("\n번호를 입력하세요: ");
+                    bool isValid = int.TryParse(Console.ReadLine(), out input);
+                    input -= 1; //입력값을 0부터 시작하도록 보정
+
+                    if (!isValid || input < 0 || input >= jobs.Length)
+                    {
+                        Console.WriteLine("\n잘못된 입력입니다. 다시 선택해주세요,");
+                    }
+
+                }
+
+                string selectedJob = jobs[input];
+                player.Job = selectedJob;
+
+                player.SetStatus();
+
+                MainScreen();
+                break;
+            }
+            else
+            //저장 정보가 있다면 불러오기
+            {
+                Console.Clear();
+
+                string playerData = File.ReadAllText(currentPath + "\\playerData.json");
+                player = JsonConvert.DeserializeObject<Player>(playerData);
+
+                string itemData = File.ReadAllText(currentPath + "\\itemData.json");
+                itemList = JsonConvert.DeserializeObject<List<Item>>(itemData);
+
+                string questData = File.ReadAllText(currentPath + "\\questData.json");
+                questList = JsonConvert.DeserializeObject<List<Quest>>(questData);
+
+                ConsoleStyler.PrintCatArt();
+
+                Console.WriteLine($"스파르타 던전에 돌아오신 것을 환영합니다. {player.Name}님.");
+                Console.WriteLine("");
+                Console.WriteLine("0. 계속하기");
+                Console.WriteLine("1. 새로하기");
+                Console.WriteLine("");
+                Console.WriteLine("원하시는 행동을 입력해주세요.");
+                Console.WriteLine("");
+
+                int input = ConsoleUtility.GetInput(0, 1);
+                if(input == 0) //계속하기를 누른 경우
+                {
+                    MainScreen();
+                    break;
+                }else if (input == 1) //새로하기를 누른 경우 저장 파일 삭제
+                {
+                    File.Delete(currentPath + "\\playerData.json");
+                    File.Delete(currentPath + "\\itemData.json");
+                    File.Delete(currentPath + "\\questData.json");
+                }
+                
+            }
         }
-
-        string selectedJob = jobs[input];
-        player.Job = selectedJob;
-
-        player.SetStatus();
-        
-        player.Info();
-        MainScreen();       
-        
     }
+
+
 
 
     public void MainScreen() //메인메뉴
@@ -198,13 +297,16 @@ class GameManager
         Console.WriteLine("이제 전투를 시작할 수 있습니다.");
         Console.WriteLine("");
         Console.WriteLine("1. 상태 보기");
-        Console.WriteLine("2. 전투 시작");
-        Console.WriteLine("4. 퀘스트");
+        Console.WriteLine($"2. 전투 시작 (현재 진행 : {player.NowStage}층)");
+        Console.WriteLine("3. 인벤토리");
+        Console.WriteLine("4. 회복 하기");
+        Console.WriteLine("5. 퀘스트");
+        Console.WriteLine("6. 저장 후 종료");
         Console.WriteLine("");
-         Console.WriteLine("원하시는 행동을 입력해주세요.");
+        Console.WriteLine("원하시는 행동을 입력해주세요.");
         Console.WriteLine("");
 
-        int input = ConsoleUtility.GetInput(1, 4);
+        int input = ConsoleUtility.GetInput(1, 6);
 
         switch(input)
         {
@@ -214,13 +316,140 @@ class GameManager
             case 2:
                 BattleScreen(); //2. 전투시작
                 break;
+            case 3:
+                InventoryScreen(); //3.인벤토리
+                break;
             case 4:
-                QuestScreen(); //4. 퀘스트
+                HealScreen(); //4.회복 하기
+                break;
+            case 5:
+                QuestScreen(); //5. 퀘스트
+                break;
+            case 6:
+                SaveData(player,itemList,questList, Directory.GetCurrentDirectory() + "\\Save"); //6.저장 후 종료
                 break;
         
         }
 
     }
+
+    static public void SaveData(Player player,List<Item> itemList,List<Quest> questList,string currentPath)
+    //저장 기능을 구현하기 위한 메서드
+    {
+        string playerData = JsonConvert.SerializeObject(player);
+        File.WriteAllText(currentPath + "\\playerData.json", playerData);
+
+        string itemData = JsonConvert.SerializeObject(itemList);
+        File.WriteAllText(currentPath + "\\itemData.json", itemData);
+
+        string questData = JsonConvert.SerializeObject(questList);
+        File.WriteAllText(currentPath + "\\questData.json", questData);
+    }
+
+    public void HealScreen()
+    {
+        Console.Clear();
+        Console.WriteLine("회복");
+        Console.WriteLine($"포션을 사용하면 체력을 30 회복 할 수 있습니다. (남은 포션:{itemList[0].Count})");
+        Console.WriteLine($"현재 HP : {player.Health}");
+        Console.WriteLine(" ");
+        Console.WriteLine("1.사용하기");
+        Console.WriteLine("0.나가기");
+        Console.WriteLine(" ");
+        Console.WriteLine("원하시는 행동을 입력해주세요.");
+        Console.WriteLine(" ");
+
+        int input = ConsoleUtility.GetInput(0, 1);
+
+        if (input == 0)
+        {
+            MainScreen();
+        }
+        else if (input == 1)
+        {
+            if (itemList[0].Count == 0) //포션이 부족합니다.
+            {
+                Console.Clear();
+                Console.WriteLine("회복 실패");
+                Console.WriteLine("포션이 부족합니다.");
+                Console.WriteLine(" ");
+                Console.WriteLine("0.나가기");
+                Console.WriteLine(" ");
+                Console.WriteLine("원하시는 행동을 입력해주세요.");
+                Console.WriteLine(" ");
+
+                ConsoleUtility.GetInput(0, 0);
+
+                MainScreen();
+
+            }
+            else if (itemList[0].Count > 0) //회복을 완료했습니다.
+            {
+                itemList[0].Count--;
+
+                player.Health = player.Health + 30;
+                if (player.Health >= player.MaxHealth) { player.Health = player.MaxHealth; }
+
+
+                Console.Clear();
+                Console.WriteLine("회복 완료");
+                Console.WriteLine("체력을 30 회복했습니다.");
+                Console.WriteLine($"현재 HP : {player.Health}");
+                Console.WriteLine(" ");
+                Console.WriteLine("0.나가기");
+                Console.WriteLine(" ");
+                Console.WriteLine("원하시는 행동을 입력해주세요.");
+                Console.WriteLine(" ");
+
+                ConsoleUtility.GetInput(0, 0);
+
+                MainScreen();
+            }
+
+
+        }
+
+    }
+
+    public void InventoryScreen() //인벤토리 화면
+    {
+        Console.Clear();
+        Console.WriteLine("인벤토리");
+        Console.WriteLine("보유 중인 아이템을 관리할 수 있습니다.");
+        Console.WriteLine(" ");
+        Console.WriteLine("[아이템 목록]");
+
+        foreach (Item item in itemList) //아이템 목록을 뽑아내는 명령어
+        {
+            if(item.Count > 0) //아이템 소지개수가 0개 이상인 경우에만 출력
+            {
+                Console.Write($" {item.Name} x {item.Count}");
+                Console.Write("   |");
+                if (item.ItemType == "체력소모품")
+                {
+                    Console.Write($" 체력 +{item.Effect}");
+                }
+                else if (item.ItemType == "마나소모품")
+                {
+                    Console.Write($" 마나 +{item.Effect}");
+                }
+                Console.Write("   |");
+                Console.Write($" {item.Info}");
+                Console.WriteLine("");
+            }
+        }
+
+        Console.WriteLine("");
+        Console.WriteLine("0.나가기");
+        Console.WriteLine(" ");
+        Console.WriteLine("원하시는 행동을 입력해주세요.");
+        Console.WriteLine(" ");
+
+        int input = ConsoleUtility.GetInput(0, 0);
+
+        MainScreen();
+    }
+
 
     public void QuestScreen() //퀘스트 리스트 나열
     {
@@ -374,8 +603,8 @@ class GameManager
     {
         Random rand = new Random();
         battleList = new List<Monster>(); //배틀리스트를 비워줍니다.
-        int monsterCount = rand.Next(1,5); //1~4의 랜덤값 배정
-
+        int monsterCount = rand.Next(player.NowStage,3 + player.NowStage); //1~(3 + 스테이지난이도) 만큼의 몬스터 등장
+        //최소몬스터 수와 최대 몬스터수 증가함.
         Console.Clear();
         Console.WriteLine("Battle!!");
         Console.WriteLine("");
@@ -794,7 +1023,7 @@ class GameManager
         player.Mana = player.Mana - player.Alphacount*10;
 
         if (player.Mana < 0) { player.Mana = 0; }
-        else if (player.Mana > 50) { player.Mana = player.MaxMana; }        
+        else if (player.Mana > player.MaxMana) { player.Mana = player.MaxMana; }        
 
         int enemy_down_count = 0;
         
@@ -883,7 +1112,7 @@ class GameManager
         player.Mana = player.Mana - player.Doublecount * 15;
 
         if (player.Mana < 0) { player.Mana = 0; }
-        else if (player.Mana > 50) { player.Mana = player.MaxMana; }
+        else if (player.Mana > player.MaxMana) { player.Mana = player.MaxMana; }
 
         int enemy_down_count = 0;
         
@@ -905,9 +1134,11 @@ class GameManager
 
         // alivemonster리스트에서 랜덤한 한 마리 뽑아서 제거, alivemonster리스트에 2마리 남을 때까지
         Random rdmonster = new Random();
-        if (alivemonster.Count == 4)
+        if (alivemonster.Count >= 4)
         {
-            for (int i = 0 ; i < 2; i++)
+            int a = alivemonster.Count;
+
+            for (int i = 0 ; i < a - 2; i++)
             {
                 int rdnum = rdmonster.Next(0, alivemonster.Count);
                 alivemonster.RemoveAt(rdnum);
@@ -1089,13 +1320,15 @@ class GameManager
         // 플레이어에게 보상 지급
         player.GainExp(totalExp);
         player.GainGold(totalGold);
+
+        player.NowStage++; //난이도 증가
+
         Console.WriteLine("");
         Console.WriteLine("0.다음");
         Console.WriteLine("");
 
         int Input = ConsoleUtility.GetInput(0, 0);
-
-        player.Health = player.MaxHealth; // 메인화면으로 돌아가기 전에 체력 회복해줌.        
+ 
         player.Mana = player.Mana + 10; // 메인화면으로 돌아가기 전에 마나 10 회복
         MainScreen();
     }
@@ -1116,7 +1349,6 @@ class GameManager
 
         int Input = ConsoleUtility.GetInput(0, 0);
 
-        player.Health = player.MaxHealth; //메인화면으로 돌아가기 전에 체력 회복해줌.
         player.Mana = player.Mana + 10; // 메인화면으로 돌아가기 전에 마나 10 회복
         MainScreen();
     }

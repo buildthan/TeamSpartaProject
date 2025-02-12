@@ -31,6 +31,7 @@ namespace SpartanTeamProject
         public bool isevade = false; // 공격이 적중했는지 여부
         public double Alphacount { get; set; } // 알파스킬 사용횟수
         public double Doublecount { get; set; } // 더블스킬 사용횟수
+        public int NowStage { get; set; } //현재 공략중인 던전 스테이지
 
 
         public Player(int level, float attack, float deffense, float health, float maxHealth, float mana, float maxMana,int exp, int expNextLevel, float gold)
@@ -50,6 +51,7 @@ namespace SpartanTeamProject
             isevade = false;
             Alphacount = 0;
             Doublecount = 0;
+            NowStage = 1;
         }
       
 
