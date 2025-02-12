@@ -71,8 +71,10 @@ namespace SpartanTeamProject
         public void GainExp(int exp)
         {
             Exp += exp;
+            Console.WriteLine("");
             Console.WriteLine($"획득한 경험치: {exp}");
             Console.WriteLine($"현재 경험치: {Exp}");
+            Console.WriteLine("");
             if (Exp >= ExpNextLevel) // 경험치가 목표를 넘으면 레벨업 처리
             {
                 LevelUp();
@@ -82,7 +84,8 @@ namespace SpartanTeamProject
         public void GainGold(int amount)
         {
             Gold += amount;
-            Console.WriteLine($"골드 {amount}을 획득했습니다! 현재 골드: {Gold}");
+            Console.WriteLine($"{amount} G을 획득했습니다! 현재 골드: {Gold} G");
+            Console.WriteLine("");
         }
 
 
