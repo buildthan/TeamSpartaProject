@@ -16,6 +16,9 @@ C:\heon_projects_visual\TeamSpartaProject\TeamSpartaProject\obj\Debug\net8.0\ref
 C:\heon_projects_visual\TeamSpartaProject\TeamSpartaProject\obj\Debug\net8.0\TeamSpartaProject.pdb
 C:\heon_projects_visual\TeamSpartaProject\TeamSpartaProject\obj\Debug\net8.0\TeamSpartaProject.genruntimeconfig.cache
 C:\heon_projects_visual\TeamSpartaProject\TeamSpartaProject\obj\Debug\net8.0\ref\TeamSpartaProject.dll
-C:\UnityProject\TeamSpartaProject\TeamSpartaProject\obj\Debug\net8.0\TeamSpartaProject.dll
-C:\UnityProject\TeamSpartaProject\TeamSpartaProject\obj\Debug\net8.0\refint\TeamSpartaProject.dll
-C:\UnityProject\TeamSpartaProject\TeamSpartaProject\obj\Debug\net8.0\TeamSpartaProject.pdb
+C:\UnityProject\TeamSpartaProject\TeamSpartaProject\obj\Debug\net8.0\TeamSpartaProject.csproj.AssemblyReference.cache
+C:\UnityProject\TeamSpartaProject\TeamSpartaProject\obj\Debug\net8.0\TeamSpartaProject.GeneratedMSBuildEditorConfig.editorconfig
+C:\UnityProject\TeamSpartaProject\TeamSpartaProject\obj\Debug\net8.0\TeamSpartaProject.AssemblyInfoInputs.cache
+C:\UnityProject\TeamSpartaProject\TeamSpartaProject\obj\Debug\net8.0\TeamSpartaProject.AssemblyInfo.cs
+C:\UnityProject\TeamSpartaProject\TeamSpartaProject\obj\Debug\net8.0\TeamSpartaProject.csproj.CoreCompileInputs.cache
+C:\UnityProject\TeamSpartaProject\TeamSpartaProject\obj\Debug\net8.0\TeamSpartaProject.sourcelink.json

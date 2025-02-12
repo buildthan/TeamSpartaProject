@@ -11,6 +11,12 @@ class Program
     {
         GameManager gm = new GameManager(); //생성자를 이용해 시작 데이터 세팅
         gm.MainScreen();
+
+        //Inventory playerInventory = new Inventory();
+        //BattleSettingScreen(playerInventory);
+
+        //// 인벤토리 출력
+        //playerInventory.DisplayInventory();
     }
 
 }
@@ -68,6 +74,14 @@ class GameManager
                 30, //최대 체력
                 10 //공격력
              ),
+            //new Monster
+            //(
+            //    "한효승", //이름
+            //    20, //레벨
+            //    50, //현재 체력
+            //    50, //최대 체력
+            //    20 //공격력
+            // ),
 
         };
     }
@@ -81,7 +95,6 @@ class GameManager
     public void MainScreen() //메인메뉴
     {
 
-
         Console.Clear();
         // 고양이 아트 출력
         ConsoleStyler.PrintCatArt();
@@ -92,6 +105,7 @@ class GameManager
         Console.WriteLine("");
         Console.WriteLine("1. 상태 보기");
         Console.WriteLine("2. 전투 시작");
+        Console.WriteLine("3. 전투 준비");
         Console.WriteLine("");
         Console.WriteLine("원하시는 행동을 입력해주세요.");
         Console.WriteLine("");
@@ -106,7 +120,10 @@ class GameManager
             case 2:
                 BattleScreen(); //2. 전투시작
                 break;
-        
+            case 3:
+                BattleSettingScreen(); //3. 아이템 선택 - 인벤토리에 넣기
+                break;
+
         }
 
     }
@@ -164,7 +181,31 @@ class GameManager
                 Console.WriteLine($"{i + 1} Lv.{battleList[i].Level} {battleList[i].Name} HP {battleList[i].Health}");
 
             }
+        }}
+
+    public void BattleSettingScreen(Player player) //전투 준비하기 창
+    {
+        Console.WriteLine("전투를 준비하는 중입니다...");
+
+        // 랜덤 아이템 두 개 선택
+        Random random = new Random();
+        var randomItems = Item.AllItems.OrderBy(x => random.Next()).Take(2).ToList();
+
+        // 선택된 아이템을 인벤토리에 추가
+        foreach (var item in randomItems)
+        {
+            inventory.AddItem(item);
+            Console.WriteLine($"획득: {item.Name}");
         }
+
+        switch (input)
+        {
+            case 0:
+                MainScreen(); //0. 나가기
+                break;
+
+        }
+    }
 
         Console.WriteLine("");
 
@@ -414,23 +455,22 @@ class GameManager
     }
 
     public void Lose()
-    {
-        Console.Clear();
+{
+    Console.Clear();
 
-        Console.WriteLine("Battle!! - Result");
-        Console.WriteLine("");
-        Console.WriteLine("You Lose");
-        Console.WriteLine("");
-        Console.WriteLine($"Lv. {player.Level} {player.Name}");
-        Console.WriteLine($"HP {player.MaxHealth} -> {player.Health}");
-        Console.WriteLine("");
-        Console.WriteLine("0.다음");
-        Console.WriteLine("");
+    Console.WriteLine("Battle!! - Result");
+    Console.WriteLine("");
+    Console.WriteLine("You Lose");
+    Console.WriteLine("");
+    Console.WriteLine($"Lv. {player.Level} {player.Name}");
+    Console.WriteLine($"HP {player.MaxHealth} -> {player.Health}");
+    Console.WriteLine("");
+    Console.WriteLine("0.다음");
+    Console.WriteLine("");
 
-        int Input = ConsoleUtility.GetInput(0, 0);
+    int Input = ConsoleUtility.GetInput(0, 0);
 
-        player.Health = player.MaxHealth; //메인화면으로 돌아가기 전에 체력 회복해줌.
-        MainScreen();
+    player.Health = player.MaxHealth; //메인화면으로 돌아가기 전에 체력 회복해줌.
+    MainScreen();
     }
-
 }
