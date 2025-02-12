@@ -3,6 +3,7 @@ using System.Runtime.Serialization.Formatters.Binary;
 using SpartanTeamProject;
 using Newtonsoft.Json;
 
+
 namespace TeamProject;
 
 class Program
@@ -10,23 +11,26 @@ class Program
     static void Main(string[] args)
     {
         GameManager gm = new GameManager(); //생성자를 이용해 시작 데이터 세팅
-        gm.MainScreen();
+        gm.StartScreen();
     }
 
 }
+
+
 
 class GameManager
 {
     Player player;
     List<Monster> monsterList;
     List<Monster> battleList;
+    
+
 
     public GameManager()
     {
         player = new Player(
-            "Chad", //플레이어 이름
+
             1, //플레이어 레벨
-            "전사", //플레이어 직업
             20, //플레이어 공격력
             5, //플레이어 방어력
             100, //플레이어 현재체력
@@ -74,11 +78,11 @@ class GameManager
 
     public static T DeepClone<T>(T obj) //리스트 값을 참조하지 않고 복사해오기 위한 매서드
     {
-        string jsonString = JsonConvert.SerializeObject(obj);
+        String jsonString = JsonConvert.SerializeObject(obj);
         return JsonConvert.DeserializeObject<T>(jsonString);
     }
 
-    public void MainScreen() //메인메뉴
+    public void StartScreen()
     {
         Console.Clear();
 
@@ -86,14 +90,62 @@ class GameManager
         ConsoleStyler.PrintCatArt();
 
 
-        Console.Clear();
         Console.WriteLine("스파르타 던전에 오신 여러분 환영합니다.");
+        Console.WriteLine("");
+        Console.WriteLine("원하시는 이름을 설정해주세요.");
+
+        Console.WriteLine("");
+        Console.Write(""); 
+        player.Name = Console.ReadLine(); //캐릭터 이름 짓기
+
+        Console.Clear();
+
+
+        Console.WriteLine("");
+        Console.WriteLine($"반갑습니다 {player.Name} 님!");
+        Console.WriteLine("");
+
+        string[] jobs = { "전사", "마법사", "도적", "궁수" };
+
+        int input = -1; //유효한 입력이 들어올 때까지 반복
+        while (input < 0 || input >= jobs.Length)
+        {
+            Console.WriteLine("\n원하는 직업을 선택하십시오: \n");
+            for (int i = 0; i < jobs.Length; i++)
+            {
+                Console.WriteLine($"{i + 1}. {jobs[i]}");
+            }
+            Console.WriteLine("\n번호를 입력하세요: ");
+            bool isValid = int.TryParse(Console.ReadLine(), out input);
+            input -= 1; //입력값을 0부터 시작하도록 보정
+
+            if (!isValid || input < 0 || input >= jobs.Length)
+            {
+                Console.WriteLine("\n잘못된 입력입니다. 다시 선택해주세요,");
+            }
+            
+        }
+
+        string selectedJob = jobs[input];
+
+        player = new Player(player.Name, selectedJob);
+        player.Info();
+        MainScreen();       
+        
+    }
+
+
+    public void MainScreen() //메인메뉴
+    {
+        Console.Clear();
+
+       
         Console.WriteLine("이제 전투를 시작할 수 있습니다.");
         Console.WriteLine("");
         Console.WriteLine("1. 상태 보기");
         Console.WriteLine("2. 전투 시작");
         Console.WriteLine("");
-        Console.WriteLine("원하시는 행동을 입력해주세요.");
+         Console.WriteLine("원하시는 행동을 입력해주세요.");
         Console.WriteLine("");
 
         int input = ConsoleUtility.GetInput(1, 2);
