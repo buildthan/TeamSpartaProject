@@ -45,7 +45,9 @@ class GameManager
                 2, //레벨
                 15, //현재 체력
                 15, //최대 체력
-                5 //공격력
+                5, //공격력
+                2, //경험치 보상
+                500 //골드 보상
              ),
             new Monster
             (
@@ -53,7 +55,9 @@ class GameManager
                 3, //레벨
                 10, //현재 체력
                 10, //최대 체력
-                9 //공격력
+                9, //공격력
+                3, //경험치 보상
+                500 //골드 보상
              ),
             new Monster
             (
@@ -61,7 +65,9 @@ class GameManager
                 5, //레벨
                 25, //현재 체력
                 25, //최대 체력
-                8 //공격력
+                8, //공격력
+                5, //경험치 보상
+                500 //골드 보상
              ),
             new Monster
             (
@@ -69,7 +75,9 @@ class GameManager
                 10, //레벨
                 30, //현재 체력
                 30, //최대 체력
-                10 //공격력
+                10, //공격력
+                10, //경험치 보상
+                500 //골드 보상
              ),
 
         };
@@ -225,7 +233,10 @@ class GameManager
         Console.WriteLine("대상을 선택해주세요.");
         Console.WriteLine("");
 
-        
+        int totalExp = 0;
+        int totalGold = 0;
+
+
         while (true)
         
         {
@@ -233,7 +244,7 @@ class GameManager
 
             if (input == 0) //취소를 눌렀다면
             {
-                EnemyPhase();
+                EnemyPhase(totalExp, totalGold);
                 break;
                 //바로 Enemy Phase 시작
             }
@@ -256,6 +267,9 @@ class GameManager
     public void AttackResultScreen(int input) //공격 결과창
     {
         int enemy_down_count = 0;
+        // 경험치, 골드 변수
+        int totalExp = 0;
+        int totalGold = 0;
 
         Random rand = new Random();
         Console.Clear();
@@ -293,12 +307,20 @@ class GameManager
 
         int Input = ConsoleUtility.GetInput(0,0);
 
+        // 몬스터들 처치 후 보상 처리
+        foreach (var monster in battleList)
+        {
+            totalExp += monster.GetExp();  // 몬스터의 경험치 합산
+            totalGold += monster.GetGold(); // 몬스터의 골드 합산
+        }
+
+
         while (true)
         {
             if (enemy_down_count == battleList.Count) //적들이 모두 쓰러졌다면
             {
                 //Victory 결과창 출력
-                Victory();
+                Victory(totalExp, totalGold);
                 break;
             }
 
@@ -311,13 +333,13 @@ class GameManager
 
             if (player.Health > 0) //플레이어 체력이 여전히 남아있다면
             {
-                EnemyPhase(); //적 공격 차례 시작
+                EnemyPhase(totalExp, totalGold); //적 공격 차례 시작
                 break;
             }
         }
     }
 
-    public void EnemyPhase() //적의 공격 차례
+    public void EnemyPhase(int totalExp, int totalGold) //적의 공격 차례
     {
         int enemy_down_count = 0;
 
@@ -370,12 +392,14 @@ class GameManager
             }
         }
 
+        Victory(totalExp, totalGold);
+
         while (true)
         {
             if (enemy_down_count == battleList.Count) //적들이 모두 쓰러졌다면
             {
                 //Victory 결과창 출력
-                Victory();
+                Victory(totalExp, totalGold);
                 break;
             }
 
@@ -394,7 +418,7 @@ class GameManager
         }
     }
 
-    public void Victory()
+    public void Victory(int totalExp, int totalGold)
     {
         Console.Clear();
 
@@ -407,9 +431,13 @@ class GameManager
         Console.WriteLine("[캐릭터 정보]");
         Console.WriteLine($"Lv. {player.Level} {player.Name}");
         Console.WriteLine($"HP {player.MaxHealth} -> {player.Health}");
-        Console.WriteLine($"Exp {player.Exp} -> {player.ExpNextLevel}");
+        Console.WriteLine($"Exp{player.Exp} -> {totalExp}");
         Console.WriteLine("");
         Console.WriteLine("[획득 아이템]");
+        Console.WriteLine($"{totalGold}Gold");
+        // 플레이어에게 보상 지급
+        player.GainExp(totalExp);
+        player.GainGold(totalGold);
         Console.WriteLine("");
         Console.WriteLine("0.다음");
         Console.WriteLine("");

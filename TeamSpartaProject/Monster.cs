@@ -18,7 +18,7 @@ namespace SpartanTeamProject
         public int GoldReward { get; set; } // 골드 보상
         
 
-        public Monster(string name, int level, double health, double maxHealth, double attack)
+        public Monster(string name, int level, double health, double maxHealth, double attack, int expReward, int goldReward)
         {
             Name = name;
             Level = level;
