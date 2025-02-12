@@ -7,12 +7,12 @@
       "RelativeMoniker": "D:0:0:{432768E5-40C8-4511-8B80-1BA0060A2DF3}|TeamSpartaProject\\TeamSpartaProject.csproj|solutionrelative:teamspartaproject\\monster.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{432768E5-40C8-4511-8B80-1BA0060A2DF3}|TeamSpartaProject\\TeamSpartaProject.csproj|c:\\users\\user\\teamprojects\\teamspartaproject\\teamspartaproject\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{432768E5-40C8-4511-8B80-1BA0060A2DF3}|TeamSpartaProject\\TeamSpartaProject.csproj|solutionrelative:teamspartaproject\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{432768E5-40C8-4511-8B80-1BA0060A2DF3}|TeamSpartaProject\\TeamSpartaProject.csproj|c:\\users\\user\\teamprojects\\teamspartaproject\\teamspartaproject\\player.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{432768E5-40C8-4511-8B80-1BA0060A2DF3}|TeamSpartaProject\\TeamSpartaProject.csproj|solutionrelative:teamspartaproject\\player.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{432768E5-40C8-4511-8B80-1BA0060A2DF3}|TeamSpartaProject\\TeamSpartaProject.csproj|c:\\users\\user\\teamprojects\\teamspartaproject\\teamspartaproject\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{432768E5-40C8-4511-8B80-1BA0060A2DF3}|TeamSpartaProject\\TeamSpartaProject.csproj|solutionrelative:teamspartaproject\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -32,27 +32,27 @@
               "RelativeDocumentMoniker": "TeamSpartaProject\\Monster.cs",
               "ToolTip": "C:\\Users\\user\\TeamProjects\\TeamSpartaProject\\TeamSpartaProject\\Monster.cs",
               "RelativeToolTip": "TeamSpartaProject\\Monster.cs",
-              "ViewState": "AgIAAA0AAAAAAAAAAAAQwAkAAAARAAAAAAAAAA==",
+              "ViewState": "AgIAAAkAAAAAAAAAAAA8wDEAAAAcAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-02-11T07:07:13.574Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 1,
               "Title": "Player.cs",
               "DocumentMoniker": "C:\\Users\\user\\TeamProjects\\TeamSpartaProject\\TeamSpartaProject\\Player.cs",
               "RelativeDocumentMoniker": "TeamSpartaProject\\Player.cs",
               "ToolTip": "C:\\Users\\user\\TeamProjects\\TeamSpartaProject\\TeamSpartaProject\\Player.cs",
               "RelativeToolTip": "TeamSpartaProject\\Player.cs",
-              "ViewState": "AgIAAAwAAAAAAAAAAAA0wBMAAAAfAAAAAAAAAA==",
+              "ViewState": "AgIAAC8AAAAAAAAAAAAYwDoAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-02-11T06:19:34.754Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 2,
               "Title": "Program.cs",
               "DocumentMoniker": "C:\\Users\\user\\TeamProjects\\TeamSpartaProject\\TeamSpartaProject\\Program.cs",
               "RelativeDocumentMoniker": "TeamSpartaProject\\Program.cs",
@@ -60,8 +60,7 @@
               "RelativeToolTip": "TeamSpartaProject\\Program.cs",
               "ViewState": "AgIAAIgBAAAAAAAAAAAIwJsBAAAiAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-02-08T05:50:16.975Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-02-08T05:50:16.975Z"
             }
           ]
         }

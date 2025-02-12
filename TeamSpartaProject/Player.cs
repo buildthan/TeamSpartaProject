@@ -57,14 +57,6 @@ namespace SpartanTeamProject
             return damage;
         }
 
-        // 레벨업 확인
-        public void CheckLevelUp()
-        {
-            if (Exp >= ExpNextLevel)
-            {
-                LevelUp();  // 경험치가 목표에 도달하면 레벨업
-            }
-        }
         // 레벨업 메서드
         private void LevelUp()
         {
@@ -76,22 +68,23 @@ namespace SpartanTeamProject
             Console.WriteLine($"{Name}이(가) 레벨 {Level}로 상승했습니다!");
         }
         // 몬스터 처치 후 경험치 추가
-        public void GainExp(Monster monster)
+        public void GainExp(int exp)
         {
-            Exp += monster.GetExp();  // 몬스터의 경험치만큼 추가
-            Console.WriteLine($"{monster.Name} 처치! 경험치 {monster.GetExp()} 획득!");
-
-            CheckLevelUp();  // 레벨업 체크
+            Exp += exp;
+            Console.WriteLine($"획득한 경험치: {exp}");
+            Console.WriteLine($"현재 경험치: {Exp}");
+            if (Exp >= ExpNextLevel) // 경험치가 목표를 넘으면 레벨업 처리
+            {
+                LevelUp();
+            }
         }
         // 골드 획득 메서드
-        public void GainGold(Monster monster)
+        public void GainGold(int amount)
         {
-            int gold = monster.GetGold();
-            Gold += gold;
-            Console.WriteLine($"{monster.Name} 처치! 골드 {gold} 획득! 현재 골드: {Gold}");
+            Gold += amount;
+            Console.WriteLine($"골드 {amount}을 획득했습니다! 현재 골드: {Gold}");
         }
 
-       
 
     }
 }
