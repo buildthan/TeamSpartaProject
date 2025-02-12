@@ -57,61 +57,41 @@ namespace SpartanTeamProject
             return damage;
         }
 
-        //// 레벨업 확인
-        //public void CheckLevelUp()
-        //{
-        //    if (Exp >= ExpNextLevel)
-        //    {
-        //        LevelUp();  // 경험치가 목표에 도달하면 레벨업
-        //    }
-        //}
-        //// 레벨업 메서드
-        //private void LevelUp()
-        //{
-        //    Level++;
-        //    Attack += 0.5;  // 레벨업 시 공격력 증가
-        //    Deffense += 1;   // 레벨업 시 방어력 증가
-        //    Exp -= ExpNextLevel;  // 레벨업 후 경험치 초기화
-        //    ExpNextLevel = (int)(ExpNextLevel * 3.5);  // 다음 레벨업까지 필요한 경험치 증가
-        //    Console.WriteLine($"{Name}이(가) 레벨 {Level}로 상승했습니다!");
-        //}
-        //// 몬스터 처치 후 경험치 추가
-        //public void GainExp(Monster monster)
-        //{
-        //    Exp += monster.GetExp();  // 몬스터의 경험치만큼 추가
-        //    Console.WriteLine($"{monster.Name} 처치! 경험치 {monster.GetExp()} 획득!");
-
-        //    CheckLevelUp();  // 레벨업 체크
-        //}
-        //// 골드 획득
-        //public void GainGold(Monster monster)
-        //{
-        //    int gold = monster.GetGold();
-        //    Gold += gold;
-        //    Console.WriteLine($"{monster.Name} 처치! 골드 {gold} 획득! 현재 골드: {Gold}");
-        //}
-        //// 배틀 승리 보상
-        //public void BattleWin(Monster monster)
-        //{
-        //    GainExp(monster);
-        //    GainGold(monster);
-        //}
-
-        // 경험치로 레벨업을 처리
-        public void LevelUp()
+        // 레벨업 확인
+        public void CheckLevelUp()
         {
-            while (Exp >= Level * 10)  // 레벨 10당 경험치 필요
+            if (Exp >= ExpNextLevel)
             {
-                Level++;
-                Attack += 0.5;
-                Deffense += 1;
-                Exp -= Level * 10;
-                Console.WriteLine($"레벨업! 새로운 레벨: {Level}, 공격력: {Attack}, 방어력: {Deffense}");
+                LevelUp();  // 경험치가 목표에 도달하면 레벨업
             }
         }
-        
+        // 레벨업 메서드
+        private void LevelUp()
+        {
+            Level++;
+            Attack += 0.5;  // 레벨업 시 공격력 증가
+            Deffense += 1;   // 레벨업 시 방어력 증가
+            Exp -= ExpNextLevel;  // 레벨업 후 경험치 초기화
+            ExpNextLevel = (int)(ExpNextLevel * 3.5);  // 다음 레벨업까지 필요한 경험치 증가
+            Console.WriteLine($"{Name}이(가) 레벨 {Level}로 상승했습니다!");
+        }
+        // 몬스터 처치 후 경험치 추가
+        public void GainExp(Monster monster)
+        {
+            Exp += monster.GetExp();  // 몬스터의 경험치만큼 추가
+            Console.WriteLine($"{monster.Name} 처치! 경험치 {monster.GetExp()} 획득!");
 
+            CheckLevelUp();  // 레벨업 체크
+        }
+        // 골드 획득 메서드
+        public void GainGold(Monster monster)
+        {
+            int gold = monster.GetGold();
+            Gold += gold;
+            Console.WriteLine($"{monster.Name} 처치! 골드 {gold} 획득! 현재 골드: {Gold}");
+        }
 
+       
 
     }
 }

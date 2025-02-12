@@ -18,7 +18,7 @@ namespace SpartanTeamProject
         public int GoldReward { get; set; } // 골드 보상
         
 
-        public Monster(string name, int level, double health, double maxHealth, double attack, int expReward, int goldReward)
+        public Monster(string name, int level, double health, double maxHealth, double attack)
         {
             Name = name;
             Level = level;
@@ -27,12 +27,6 @@ namespace SpartanTeamProject
             Attack = attack;
             ExpReward = level; // 경험치는 몬스터 레벨만큼
             GoldReward = 500; // 골드 보상
-            ExpReward = level;  // 몬스터 레벨에 비례한 경험치
-            GoldReward = level * 5;    // 몬스터 레벨 * 5 만큼 골드 보상
-        }
-
-        public Monster(int v) // 매개변수 어쩌구...
-        {
         }
 
         public int MonsterAttack()
@@ -47,17 +41,16 @@ namespace SpartanTeamProject
             return damage;
         }
 
-        //// 몬스터 처치 후 경험치 얻기
-        //public int GetExp()
-        //{
-        //    return ExpReward;
-        //}
-        //// 골드 보상
-        //public int GetGold()
-        //{
-        //    return GoldReward;
-        //}
-
+        // 몬스터 처치 후 경험치 얻기
+        public int GetExp()
+        {
+            return ExpReward;
+        }
+        // 골드 보상
+        public int GetGold()
+        {
+            return GoldReward;
+        }
 
     }
 }

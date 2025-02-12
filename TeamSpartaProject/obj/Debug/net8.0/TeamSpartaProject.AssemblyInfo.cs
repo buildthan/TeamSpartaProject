@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("TeamSpartaProject")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+58e32d4ab87d2e2ab26a4a83145e8622c254fe6d")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+9a6bada162b8b1ca7efa920be01bcbcf2b932a8d")]
 [assembly: System.Reflection.AssemblyProductAttribute("TeamSpartaProject")]
 [assembly: System.Reflection.AssemblyTitleAttribute("TeamSpartaProject")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

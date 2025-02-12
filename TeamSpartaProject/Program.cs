@@ -3,7 +3,6 @@ using System.Runtime.Serialization.Formatters.Binary;
 using SpartanTeamProject;
 using Newtonsoft.Json;
 using System.Threading;
-using static TeamProject.GameManager;
 
 namespace TeamProject;
 
@@ -46,9 +45,7 @@ class GameManager
                 2, //레벨
                 15, //현재 체력
                 15, //최대 체력
-                5, //공격력
-                2,
-                10
+                5 //공격력
              ),
             new Monster
             (
@@ -56,9 +53,7 @@ class GameManager
                 3, //레벨
                 10, //현재 체력
                 10, //최대 체력
-                9, //공격력
-                3,
-                15
+                9 //공격력
              ),
             new Monster
             (
@@ -66,9 +61,7 @@ class GameManager
                 5, //레벨
                 25, //현재 체력
                 25, //최대 체력
-                8, //공격력
-                5,
-                25
+                8 //공격력
              ),
             new Monster
             (
@@ -76,9 +69,7 @@ class GameManager
                 10, //레벨
                 30, //현재 체력
                 30, //최대 체력
-                10, //공격력
-                10,
-                50
+                10 //공격력
              ),
 
         };
@@ -402,30 +393,6 @@ class GameManager
             }
         }
     }
-    // 배틀 오류나면 삭제**************
-    public class Battle
-    {
-        private Random rand = new Random();
-
-        public void StartBattle(Player player)
-        {
-            // 랜덤으로 몬스터 생성 (레벨 1~5 사이)
-            Monster monster = new Monster(rand.Next(1, 6));
-
-            Console.WriteLine($"몬스터 등장! 레벨 {monster.Level} 몬스터!");
-
-            // 전투 시, 플레이어가 몬스터를 처치했다고 가정
-            // 경험치와 골드 획득
-            player.Exp += monster.ExpReward;
-            player.Gold += monster.GoldReward;
-
-            Console.WriteLine($"몬스터 처치! 경험치 {monster.ExpReward}, 골드 {monster.GoldReward} 획득!");
-
-            // 레벨업 체크
-            player.LevelUp();
-        }
-    }
-    //배틀 오륜면 삭제*****************
 
     public void Victory()
     {
@@ -436,7 +403,6 @@ class GameManager
         Console.WriteLine("Victory");
         Console.WriteLine("");
         Console.WriteLine($"던전에서 몬스터 {battleList.Count}마리를 잡았습니다.");
-        Console.WriteLine($"현재 레벨: {player.Level}, 경험치: {player.Exp}, 골드: {player.Gold}\n");
         Console.WriteLine("");
         Console.WriteLine("[캐릭터 정보]");
         Console.WriteLine($"Lv. {player.Level} {player.Name}");
@@ -444,7 +410,6 @@ class GameManager
         Console.WriteLine($"Exp {player.Exp} -> {player.ExpNextLevel}");
         Console.WriteLine("");
         Console.WriteLine("[획득 아이템]");
-        Console.WriteLine($"골드: {player.Gold}");
         Console.WriteLine("");
         Console.WriteLine("0.다음");
         Console.WriteLine("");
