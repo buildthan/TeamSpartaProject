@@ -392,7 +392,6 @@ class GameManager
             }
         }
 
-        Victory(totalExp, totalGold);
 
         while (true)
         {
