@@ -1,10 +1,10 @@
 {
   "version": 2,
-  "dgSpecHash": "H2lg8FB57DA=",
+  "dgSpecHash": "o+CbyXnqaug=",
   "success": true,
-  "projectFilePath": "C:\\Users\\user\\TeamProjects\\TeamSpartaProject\\TeamSpartaProject\\TeamSpartaProject.csproj",
+  "projectFilePath": "C:\\heon_projects_visual\\TeamSpartaProject\\TeamSpartaProject\\TeamSpartaProject.csproj",
   "expectedPackageFiles": [
-    "C:\\Users\\user\\.nuget\\packages\\newtonsoft.json\\13.0.3\\newtonsoft.json.13.0.3.nupkg.sha512"
+    "C:\\Users\\a9175\\.nuget\\packages\\newtonsoft.json\\13.0.3\\newtonsoft.json.13.0.3.nupkg.sha512"
   ],
   "logs": []
 }

@@ -55,23 +55,23 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\user\\.nuget\\packages\\": {},
+    "C:\\Users\\a9175\\.nuget\\packages\\": {},
     "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\user\\TeamProjects\\TeamSpartaProject\\TeamSpartaProject\\TeamSpartaProject.csproj",
+      "projectUniqueName": "C:\\heon_projects_visual\\TeamSpartaProject\\TeamSpartaProject\\TeamSpartaProject.csproj",
       "projectName": "TeamSpartaProject",
-      "projectPath": "C:\\Users\\user\\TeamProjects\\TeamSpartaProject\\TeamSpartaProject\\TeamSpartaProject.csproj",
-      "packagesPath": "C:\\Users\\user\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\user\\TeamProjects\\TeamSpartaProject\\TeamSpartaProject\\obj\\",
+      "projectPath": "C:\\heon_projects_visual\\TeamSpartaProject\\TeamSpartaProject\\TeamSpartaProject.csproj",
+      "packagesPath": "C:\\Users\\a9175\\.nuget\\packages\\",
+      "outputPath": "C:\\heon_projects_visual\\TeamSpartaProject\\TeamSpartaProject\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
       ],
       "configFilePaths": [
-        "C:\\Users\\user\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\a9175\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
