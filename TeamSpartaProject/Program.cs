@@ -105,7 +105,12 @@ class GameManager
         Console.WriteLine("");
         Console.WriteLine("1. 상태 보기");
         Console.WriteLine("2. 전투 시작");
+<<<<<<< Updated upstream
         Console.WriteLine("3. 전투 준비");
+=======
+        Console.WriteLine("3. 회복 아이템");
+        Console.WriteLine("4. 퀘스트");
+>>>>>>> Stashed changes
         Console.WriteLine("");
         Console.WriteLine("원하시는 행동을 입력해주세요.");
         Console.WriteLine("");
@@ -121,9 +126,183 @@ class GameManager
                 BattleScreen(); //2. 전투시작
                 break;
             case 3:
+<<<<<<< Updated upstream
                 BattleSettingScreen(); //3. 아이템 선택 - 인벤토리에 넣기
+=======
+                Recovery(); //3. 회복 아이템
+                break;
+            case 4:
+                QuestScreen(); //4. 퀘스트
+>>>>>>> Stashed changes
                 break;
 
+<<<<<<< Updated upstream
+=======
+    }
+
+    public void Recovery()
+    {
+        while (true)
+        {
+            Console.Clear();
+            Console.WriteLine("\n**회복**");
+            Console.WriteLine($"포션을 사용하면 체력을 30 회복 할 수 있습니다. (남은 포션: {player.PotionCount} )\n");
+            Console.WriteLine("1. 사용하기");
+            Console.WriteLine("0. 나가기");
+            Console.Write("\n원하시는 행동을 입력해주세요.\n>> ");
+
+            string input = Console.ReadLine();
+
+            if (input == "1")
+            {
+                if (player.PotionCount > 0)
+                {
+                    int Health = Math.Min(30, player.MaxHealth - player.Health);
+                    player.Health += healAmount;
+                    player.PotionCount--;
+                    Console.WriteLine($"\n회복을 완료했습니다! (+{healAmount} HP)");
+                }
+                else
+                {
+                    Console.WriteLine("\n포션이 부족합니다.");
+                }
+            }
+            else if (input == "0")
+            {
+                Console.WriteLine("\n메인 메뉴로 돌아갑니다.\n");
+                break;
+            }
+            else
+            {
+                Console.WriteLine("\n잘못된 입력입니다. 다시 입력해주세요.\n");
+            }
+
+            Console.WriteLine("\n아무 키나 눌러서 계속하세요...");
+            Console.ReadKey();
+        }
+
+        MainScreen();
+    }
+
+    public void QuestScreen() //퀘스트 리스트 나열
+    {
+        List<int> ints = new List<int>();
+
+        Console.Clear();
+        Console.WriteLine("Quest!!");
+        Console.WriteLine("");
+
+        for (int i = 0; i < questList.Count; i++)
+        {
+            if (questList[i].IsClear == false) //클리어한 퀘스트만 창에 띄움.
+            {
+                ints.Add(i);
+            }
+        }
+        
+        for(int i = 0; i<ints.Count; i++)
+        {
+            Console.Write($"{i + 1}. {questList[ints[i]].Title}");
+
+            if (questList[ints[i]].IsAccept == true)
+            {
+                Console.Write(" (진행중)");
+            }
+
+            Console.WriteLine();
+        }
+
+        Console.WriteLine("");
+        Console.WriteLine("0. 돌아가기");
+        Console.WriteLine("");
+        Console.WriteLine("원하시는 행동을 선택해주세요.");
+        Console.WriteLine("");
+
+        int input = ConsoleUtility.GetInput(0, ints.Count);
+
+        if (input == 0) //돌아가기를 선택한 경우
+        {
+            MainScreen();
+        }
+        else
+        {
+            QuestDetail(ints[input - 1]); //퀘스트의 인덱스 번호를 퀘스트디테일에 넘겨준다.
+        }
+
+    }
+
+    public void QuestDetail(int select)
+    { 
+        Console.Clear();
+        Console.WriteLine("Quest!!");
+        Console.WriteLine("");
+
+        if (questList[select].IsAccept == true)
+        {
+            Console.WriteLine("현재 진행중인 퀘스트 입니다.");
+            Console.WriteLine("");
+        }
+
+        questList[select].printInfo();
+
+        Console.WriteLine("");
+
+        if (questList[select].IsAccept == true)
+        //퀘스트를 수락했다면
+        {
+            if(questList[select].NowCondition >= questList[select].CompletionCondition) //퀘스트를 클리어했다면
+            {
+                Console.WriteLine("1. 보상 받기");
+                Console.WriteLine("2. 돌아가기");
+                Console.WriteLine("");
+                Console.WriteLine("원하시는 행동을 입력해주세요.");
+                Console.WriteLine("");
+
+                int input = ConsoleUtility.GetInput(1, 2);
+
+                if(input == 1) //보상받기를 누른 경우
+                {
+                    player.Gold += questList[select].Reward; //보상을 지급하고 퀘스트 리셋
+                    questList[select].IsClear = true;
+                    questList[select].IsAccept = false;
+                    questList[select].NowCondition = 0;
+                    QuestScreen();
+                }
+                else //돌아가기를 누른 경우
+                {
+                    QuestScreen();
+                }
+
+            }
+            else //퀘스트를 클리어하지 못했다면
+            {
+                Console.WriteLine("1. 돌아가기");
+                Console.WriteLine("");
+                Console.WriteLine("원하시는 행동을 입력해주세요.");
+                Console.WriteLine("");
+
+                int input = ConsoleUtility.GetInput(1, 1);
+
+                QuestScreen();
+            }
+        }
+        else //아직 퀘스트를 수락하지 않았다면
+        {
+            Console.WriteLine("1. 수락");
+            Console.WriteLine("2. 거절");
+            Console.WriteLine("");
+            Console.WriteLine("원하시는 행동을 입력해주세요.");
+            Console.WriteLine("");
+
+            int input = ConsoleUtility.GetInput(1, 2);
+
+            if(input == 1) //수락을 눌렀다면
+            {
+                questList[select].IsAccept = true;
+            }
+
+            QuestScreen();
+>>>>>>> Stashed changes
         }
 
     }

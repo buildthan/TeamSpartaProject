@@ -1,3 +1,4 @@
+<<<<<<< Updated upstream
 ﻿usinusing System;
 using System.Collections.Generic;
 using TeamProject;
@@ -72,4 +73,28 @@ public class Program
 
         }
     }
+=======
+﻿using System;
+
+namespace SpartanTeamProject
+{
+    class Item
+    {
+        public string Name { get; set; }
+        public string Description { get; set; }
+
+        public Item(string name, string description)
+        {
+            Name = name;
+            Description = description;
+        }
+    }
+
+    class Potion : Item
+    {
+        public int HealAmount { get; set; } = 30;
+
+        public Potion() : base("회복 포션", "체력을 30 회복할 수 있습니다.") { }
+    }
+>>>>>>> Stashed changes
 }
